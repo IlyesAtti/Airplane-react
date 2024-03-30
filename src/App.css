@@ -1,0 +1,92 @@
+.gamezone {
+  position: relative;
+  width: 700px;
+  height: 500px;
+  border: 3px solid rgb(255, 255, 255);
+  margin: 0 auto;
+
+}
+.timer {
+  display: inline;
+  float: left;
+  margin-top: -30px;
+}
+
+.score {
+  display: inline;
+  float: right;
+  margin-top: -30px;
+  margin-right: 50px;
+}
+
+.start-btn {
+  visibility: visible;
+  display: inline;
+  background-color: rgb(53, 128, 3);
+  margin-left: 235px;
+  margin-top: -30px;
+}
+
+.Plane {
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  left: 300px;
+  top: 400px;
+}
+
+.bulet {
+  visibility: hidden;
+  position: absolute;
+  height: 30px;
+  width: 10px;
+  color: yellow;
+  background-color: yellow;
+  top: 380px;
+}
+
+.isActive {
+  visibility: visible;
+}
+
+.asteroid {
+  position: absolute;
+  visibility: visible;
+  top: 0px;
+  left: 20px;
+  animation: asteroid-spin infinite 5s linear;
+}
+
+.asteroid.isActive {
+  visibility: visible;
+  animation: asteroid-spin infinite 5s linear;
+}
+
+@keyframes asteroid-spin { 
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .asteroid {
+    animation: asteroid-spin infinite 20s linear;
+  }
+}
+
+.gameOver {
+  visibility: hidden;
+  font-size: 50px;
+  text-align: center;
+  margin-top: 200px;
+  color: red;
+}
+
+.restart {
+  visibility: hidden;
+  color: #333;
+  background-color: yellow;
+}
