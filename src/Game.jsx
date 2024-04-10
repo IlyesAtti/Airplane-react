@@ -54,7 +54,7 @@ export default function Game() {
         }
         if (keysPressed[32] && Date.now() - lastBulletTime >= 500) {  // delay for bullets, shot only 2 bullets/sec
           addBullet(planePosition);
-          setLastBulletTime(Date.now());
+          setLastBulletTime(Date.now());                     
         }
         if (keysPressed[39] && planePosition < 600) {
           setPlanePosition(prevPlanePosition => Math.min(prevPlanePosition + 10, 600));
@@ -111,6 +111,9 @@ export default function Game() {
     setAsteroidTopPosition(0);
     setAsteroidPosition(Math.floor(Math.random() * 560 + 1));
   }
+  const renderedBullets = bullets.map((bullet, index) => (
+    <div key={bullet.id + index} className={bullet.isActive ? 'bullet isActive' : 'bullet'} style={{ left: `${bullet.bulletPosition + 45}px`, top: `${bullet.bulletTopPosition}px` }}></div>
+  ));
 
 //--------------------- End Bullets + Asteroids------------------------------
 
@@ -129,10 +132,6 @@ export default function Game() {
     }
     return () => clearInterval(intervalId);
   }, [isStarted, time]);
-
-  const renderedBullets = bullets.map((bullet, index) => (
-    <div key={bullet.id + index} className={bullet.isActive ? 'bullet isActive' : 'bullet'} style={{ left: `${bullet.bulletPosition + 45}px`, top: `${bullet.bulletTopPosition}px` }}></div>
-  ));
 
   function restart() {
     window.location.reload(false);
