@@ -23,7 +23,7 @@
   visibility: visible;
   display: inline;
   background-color: rgb(53, 128, 3);
-  margin-left: 235px;
+  margin-left: 5px;
   margin-top: -30px;
 }
 
@@ -35,7 +35,7 @@
   top: 400px;
 }
 
-.bulet {
+.bullet {
   visibility: hidden;
   position: absolute;
   height: 30px;
@@ -78,7 +78,7 @@
 }
 
 .gameOver {
-  visibility: hidden;
+  
   font-size: 50px;
   text-align: center;
   margin-top: 200px;
@@ -86,7 +86,10 @@
 }
 
 .restart {
-  visibility: hidden;
-  color: #333;
-  background-color: yellow;
+  display: inline;
+  margin-left: 235px;
+  margin-top: -30px;
+  visibility: visible;
+  color: #fdfdfd;
+  background-color: rgb(155, 31, 31);
 }
