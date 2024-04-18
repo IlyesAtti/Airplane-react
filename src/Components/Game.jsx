@@ -5,6 +5,8 @@ import GameOver from "./GameOver";
 import Timer from './Timer';
 
 export default function Game() {
+  const halfSecconds = 500, gamezoneLeft = 0, gamezoneRight = 600, gamezoneBottom = 395, planeTop = 380, planeMoveDistance = 10;
+  const asteroidRightAdditional = 110, asterodiLeftAdditional = 70, asteroidHeight = 100, asteroidMaxRight = 560, asteroidPlaneCollisionHeigt = 310;
   const [isStarted, setIsStarted] = useState(false);
   const [planePosition, setPlanePosition] = useState(300);
   const [keysPressed, setKeysPressed] = useState({});
@@ -49,15 +51,15 @@ export default function Game() {
   useEffect(() => {    
     if(isStarted && !isGameOver) {
       const interval = setInterval(() => {
-        if (keysPressed[37] && planePosition > 0) {
-          setPlanePosition(prevPlanePosition => Math.max(prevPlanePosition - 10, 0));
+        if (keysPressed[37] && planePosition > gamezoneLeft) {
+          setPlanePosition(prevPlanePosition => Math.max(prevPlanePosition - planeMoveDistance, gamezoneLeft));
         }
-        if (keysPressed[32] && Date.now() - lastBulletTime >= 500) {  // delay for bullets, shot only 2 bullets/sec
+        if (keysPressed[32] && Date.now() - lastBulletTime >= halfSecconds) {  // delay for bullets, shot only 2 bullets/sec
           addBullet(planePosition);
           setLastBulletTime(Date.now());                     
         }
-        if (keysPressed[39] && planePosition < 600) {
-          setPlanePosition(prevPlanePosition => Math.min(prevPlanePosition + 10, 600));
+        if (keysPressed[39] && planePosition < gamezoneRight) {
+          setPlanePosition(prevPlanePosition => Math.min(prevPlanePosition + planeMoveDistance, gamezoneRight));
         }
       }, 16);
       
@@ -77,7 +79,10 @@ export default function Game() {
             bullet.isActive = false; 
           }
           if (bullet.isActive) {
-            if ((bullet.bulletPosition >= asteroidPosition - 70 && bullet.bulletPosition <= asteroidPosition + 110) && Math.abs(asteroidTopPosition - (bullet.bulletTopPosition - 100)) < 2) {
+            if ((bullet.bulletPosition >= asteroidPosition - asterodiLeftAdditional &&
+               bullet.bulletPosition <= asteroidPosition + asteroidRightAdditional) && 
+               Math.abs(asteroidTopPosition - (bullet.bulletTopPosition - asteroidHeight)) < 2
+              ) {
               setScore(prevScore => prevScore + 1);
               newAsteroid();
               bullet.isActive = false;
@@ -96,20 +101,20 @@ export default function Game() {
   function addBullet(planePosition) {
     setBullets(prevBullets => [
       ...prevBullets,
-      { id: bulletId, bulletPosition: planePosition, isActive: true, bulletTopPosition: 380 }
+      { id: bulletId, bulletPosition: planePosition, isActive: true, bulletTopPosition: planeTop }
     ]);
     setBulletId(prevBulletId => prevBulletId + 1);
   }
 
   useEffect(() => {
-    if (asteroidTopPosition === 395) {
+    if (asteroidTopPosition === gamezoneBottom) {
       newAsteroid();
     }
   }, [asteroidTopPosition]);
 
   function newAsteroid() {
     setAsteroidTopPosition(0);
-    setAsteroidPosition(Math.floor(Math.random() * 560 + 1));
+    setAsteroidPosition(Math.floor(Math.random() * asteroidMaxRight + 1));
   }
   const renderedBullets = bullets.map((bullet, index) => (
     <div key={bullet.id + index} className={bullet.isActive ? 'bullet isActive' : 'bullet'} style={{ left: `${bullet.bulletPosition + 45}px`, top: `${bullet.bulletTopPosition}px` }}></div>
@@ -150,9 +155,9 @@ export default function Game() {
 
  useEffect(() => {
     if (
-      planePosition >= asteroidPosition - 70 &&
-      planePosition <= asteroidPosition + 110 &&
-      asteroidTopPosition >= 310
+      planePosition >= asteroidPosition - asterodiLeftAdditional &&
+      planePosition <= asteroidPosition + asteroidRightAdditional &&
+      asteroidTopPosition >= asteroidPlaneCollisionHeigt
     ) {
       setIsGameOver(true);
     }

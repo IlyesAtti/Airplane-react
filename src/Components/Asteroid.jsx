@@ -1,5 +1,4 @@
-import asteroidImg from '../asteroid.png';
-
+import asteroidImg from '../Images/asteroid.png';
 export default function Asteroids(props) {
 
     return (

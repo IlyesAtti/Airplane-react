@@ -1,4 +1,4 @@
-import Plane from '../plane.png';
+import Plane from '../Images/plane.png';
 
 export default function AirPlane(props) {
     return (
