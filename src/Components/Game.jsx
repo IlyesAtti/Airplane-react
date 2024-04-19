@@ -5,8 +5,11 @@ import GameOver from "./GameOver";
 import Timer from './Timer';
 
 export default function Game() {
-  const halfSecconds = 500, gamezoneLeft = 0, gamezoneRight = 600, gamezoneBottom = 395, planeTop = 380, planeMoveDistance = 10;
-  const asteroidRightAdditional = 110, asterodiLeftAdditional = 70, asteroidHeight = 100, asteroidMaxRight = 560, asteroidPlaneCollisionHeigt = 310;
+  const halfSecconds = 500, gamezoneLeft = 0, gamezoneRight = 600, 
+    gamezoneBottom = 395, planeTop = 380, planeMoveDistance = 10;
+  const asteroidRightAdditional = 110, asterodiLeftAdditional = 70, 
+    asteroidHeight = 100, asteroidMaxRight = 560, 
+    asteroidPlaneCollisionHeigt = 310;
   const [isStarted, setIsStarted] = useState(false);
   const [planePosition, setPlanePosition] = useState(300);
   const [keysPressed, setKeysPressed] = useState({});
@@ -52,14 +55,17 @@ export default function Game() {
     if(isStarted && !isGameOver) {
       const interval = setInterval(() => {
         if (keysPressed[37] && planePosition > gamezoneLeft) {
-          setPlanePosition(prevPlanePosition => Math.max(prevPlanePosition - planeMoveDistance, gamezoneLeft));
+          setPlanePosition(prevPlanePosition => 
+            Math.max(prevPlanePosition - planeMoveDistance, gamezoneLeft));
         }
-        if (keysPressed[32] && Date.now() - lastBulletTime >= halfSecconds) {  // delay for bullets, shot only 2 bullets/sec
+        if (keysPressed[32] && Date.now() - lastBulletTime >= halfSecconds) { 
+           // delay for bullets, shot only 2 bullets/sec
           addBullet(planePosition);
           setLastBulletTime(Date.now());                     
         }
         if (keysPressed[39] && planePosition < gamezoneRight) {
-          setPlanePosition(prevPlanePosition => Math.min(prevPlanePosition + planeMoveDistance, gamezoneRight));
+          setPlanePosition(prevPlanePosition => 
+            Math.min(prevPlanePosition + planeMoveDistance, gamezoneRight));
         }
       }, 16);
       
@@ -69,7 +75,7 @@ export default function Game() {
 
 //-------------------- End Plane and move----------------------------
 
-//---------------------Bullets + Asterodis----------------------------------
+//---------------------Bullets + Asterodi----------------------------------
 
   useEffect(() => {
     if (isStarted && !isGameOver) {
@@ -117,10 +123,11 @@ export default function Game() {
     setAsteroidPosition(Math.floor(Math.random() * asteroidMaxRight + 1));
   }
   const renderedBullets = bullets.map((bullet, index) => (
-    <div key={bullet.id + index} className={bullet.isActive ? 'bullet isActive' : 'bullet'} style={{ left: `${bullet.bulletPosition + 45}px`, top: `${bullet.bulletTopPosition}px` }}></div>
+    <div key={bullet.id + index} className={bullet.isActive ? 'bullet isActive' : 'bullet'}
+     style={{ left: `${bullet.bulletPosition + 45}px`, top: `${bullet.bulletTopPosition}px` }}></div>
   ));
 
-//--------------------- End Bullets + Asteroids------------------------------
+//--------------------- End Bullets + Asteroid------------------------------
 
 //----------------------Buttons---------------------------------------------
 
@@ -144,10 +151,12 @@ export default function Game() {
   
 //--------------------- End Buttons------------------------------
 
-//---------------------Time + Scor + Game Over-------------------
+//---------------------Time + Score + Game Over-------------------
 
   useEffect(() => {
-    if (time % 50 === 0 && attackSpeed > 2 && time > 1 && time !== lastUpdate) {
+    if (time % 50 === 0 && attackSpeed > 2 &&
+       time > 1 && time !== lastUpdate
+      ) {
       setAttackSpeed(prevAttackSpeed => Math.max(prevAttackSpeed - 1, 2));
       setLastUpdate(time);
     }
@@ -167,7 +176,7 @@ export default function Game() {
     document.querySelector('.start-btn').style = "visibility: hidden";
   }
 
-//--------------------- End Time + Scor + Game Over-------------------
+//--------------------- End Time + Score + Game Over-------------------
 
   return( 
     <>
@@ -181,7 +190,8 @@ export default function Game() {
     <AirPlane planePosition={planePosition} />
     <GameOver over = {isGameOver} />
     {renderedBullets}
-    <Asteroids asteroidPosition={asteroidPosition} asteroidTopPosition={asteroidTopPosition} />
+    <Asteroids asteroidPosition={asteroidPosition}
+     asteroidTopPosition={asteroidTopPosition} />
     </div>
     </>
   );
