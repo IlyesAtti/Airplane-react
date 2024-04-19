@@ -59,7 +59,7 @@ export default function Game() {
             Math.max(prevPlanePosition - planeMoveDistance, gamezoneLeft));
         }
         if (keysPressed[32] && Date.now() - lastBulletTime >= halfSecconds) { 
-           // delay for bullets, shot only 2 bullets/sec
+           // delay for bullets, shooting only 2 bullets/sec
           addBullet(planePosition);
           setLastBulletTime(Date.now());                     
         }
