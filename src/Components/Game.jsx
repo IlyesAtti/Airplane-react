@@ -75,7 +75,7 @@ export default function Game() {
 
 //-------------------- End Plane and move----------------------------
 
-//---------------------Bullets + Asterodi----------------------------------
+//---------------------Bullets + Asteroid----------------------------------
 
   useEffect(() => {
     if (isStarted && !isGameOver) {
