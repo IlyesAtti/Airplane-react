@@ -85,19 +85,24 @@ export default function Game() {
             bullet.isActive = false; 
           }
           if (bullet.isActive) {
-            if ((bullet.bulletPosition >= asteroidPosition - asterodiLeftAdditional &&
-               bullet.bulletPosition <= asteroidPosition + asteroidRightAdditional) && 
-               Math.abs(asteroidTopPosition - (bullet.bulletTopPosition - asteroidHeight)) < 2
+            if ((bullet.bulletPosition >= 
+              asteroidPosition - asterodiLeftAdditional &&
+               bullet.bulletPosition <= 
+               asteroidPosition + asteroidRightAdditional) && 
+               Math.abs(asteroidTopPosition - 
+                (bullet.bulletTopPosition - asteroidHeight)) < 2
               ) {
               setScore(prevScore => prevScore + 1);
               newAsteroid();
               bullet.isActive = false;
             }
-            return { ...bullet, bulletTopPosition: bullet.bulletTopPosition - 1 }; 
+            return { ...bullet, bulletTopPosition: 
+              bullet.bulletTopPosition - 1 }; 
           }
           return bullet;
         });
-        setAsteroidTopPosition(prevAsteroidTopPosition => prevAsteroidTopPosition + 1);
+        setAsteroidTopPosition(prevAsteroidTopPosition => 
+          prevAsteroidTopPosition + 1);
         setBullets(updatedBullets); 
       }, attackSpeed);
       return () => clearInterval(interval);
@@ -107,7 +112,8 @@ export default function Game() {
   function addBullet(planePosition) {
     setBullets(prevBullets => [
       ...prevBullets,
-      { id: bulletId, bulletPosition: planePosition, isActive: true, bulletTopPosition: planeTop }
+      { id: bulletId, bulletPosition: planePosition, isActive: true,
+         bulletTopPosition: planeTop }
     ]);
     setBulletId(prevBulletId => prevBulletId + 1);
   }
@@ -123,8 +129,10 @@ export default function Game() {
     setAsteroidPosition(Math.floor(Math.random() * asteroidMaxRight + 1));
   }
   const renderedBullets = bullets.map((bullet, index) => (
-    <div key={bullet.id + index} className={bullet.isActive ? 'bullet isActive' : 'bullet'}
-     style={{ left: `${bullet.bulletPosition + 45}px`, top: `${bullet.bulletTopPosition}px` }}></div>
+    <div key={bullet.id + index} className={bullet.isActive ?
+       'bullet isActive' : 'bullet'}
+     style={{ left: `${bullet.bulletPosition + 45}px`, top: `
+      ${bullet.bulletTopPosition}px` }}></div>
   ));
 
 //--------------------- End Bullets + Asteroid------------------------------

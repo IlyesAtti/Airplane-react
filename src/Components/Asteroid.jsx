@@ -6,7 +6,8 @@ export default function Asteroids(props) {
         <img
             src={asteroidImg}
             className={"asteroid"}
-            style={{ left: (props.asteroidPosition) + 'px', top: props.asteroidTopPosition + 'px' }}
+            style={{ left: (props.asteroidPosition) + 'px',
+             top: props.asteroidTopPosition + 'px' }}
         ></img>
         </>
     )

@@ -4,7 +4,8 @@ export default function GameOver({over}) {
 
         return(
             <>
-            <h2 className='gameOver' style={{visibility: 'visible'}}> GAME OVER!</h2>
+            <h2 className='gameOver' style={{visibility: 'visible'}}>
+                 GAME OVER!</h2>
             </>
         )
     }
